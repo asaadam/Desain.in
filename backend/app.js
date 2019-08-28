@@ -9,8 +9,9 @@ const authRouter = require('./routes/authRoute')
 
 app.use(express.json())
 app.use(express.urlencoded({ extended: true }))
-app.use(session(sessConfig))
 
+app.use(express.urlencoded({ extended: true }))
+app.use(express.json());
 app.use('/auth', authRouter)
 
 app.get('/', (req, res) => {
