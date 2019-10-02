@@ -1,14 +1,22 @@
 import React, { Component } from 'react';
+
 import { Row, Col, Form, Input } from 'antd';
 import Logo from '../../assets/images/logo-2.svg';
 import Deco from '../../assets/images/login-people.svg';
 import Button from '../../components/Button/Button';
 import './login.scss';
 
+import AuthContext from '../../context/auth-context';
+
 const URL_LOGIN = 'http://localhost:5000/auth/login';
 
 class Login extends Component {
 
+    // state = {
+    //     isLogin: false
+    // };
+
+    // static contextType = AuthContext;
 
     constructor(props) {
         super(props);
@@ -21,27 +29,38 @@ class Login extends Component {
                 password: "",
             },
         }
+
+        this.emailEl = React.createRef();
+        this.passwordEl = React.createRef();
     }
 
     handleSubmit = e => {
         e.preventDefault();
-        this.props.form.validateFields((err, values) => {
-            if (!err) {
+
+        const email = this.emailEl.current.value;
+        const password = this.passwordEl.current.value;
+
+        console.log(email + " " + password)
+        // if(email.trim().length === 0 || password.trim().length === 0){
+        //     return;
+        // }
+
+        // this.props.form.validateFields((err, values) => {
+            // if (!err) {
                 const body = {
-                    email: values.email,
-                    password: values.password
+                    email,
+                    password
                 }
 
                 fetch(URL_LOGIN, {
                     method: 'POST',
+                    body: JSON.stringify(body),
                     headers: {
                         'content-type': 'application/json'
-                    },
-                    body: JSON.stringify(body),
+                    }
                 }).then(response => {
                     if (response.ok) {
                         return response.json();
-
                     }
                     return response.json().then(error => {
                         throw new Error(error.message);
@@ -58,8 +77,8 @@ class Login extends Component {
                     this.setState({ login: false })
 
                 });
-            }
-        });
+            // }
+        // });
     };
 
     render() {
@@ -78,21 +97,15 @@ class Login extends Component {
                         <Form.Item label="Email" {...formItemLayout} >
                             {getFieldDecorator('email', {
                                 rules: [{ required: true, message: 'Please input your email!' }],
-                            }
-                            )(
-                                <Input placeholder="improudtodesign@mail.com" />)
-                            }
+                            })(<Input placeholder="improudtodesign@mail.com" type="email" ref={this.emailEl} />)}
                         </Form.Item>
                         <Form.Item label="Password" type="password" {...formItemLayout}>
                             {getFieldDecorator('password', {
                                 rules: [{ required: true, message: 'Please input your password!' }],
-                            }
-                            )(
-                                <Input placeholder="password" />)
-                            }
+                            })(<Input placeholder="password" type="password" ref={this.passwordEl} />)}
                         </Form.Item>
                         <Form.Item>
-                            <Button style="button primary fluid" text="masuk" htmlType="submit" onClick={this.handleSubmit}/>
+                            <Button style="button primary fluid" text="masuk" type="submit" />
                         </Form.Item>
                         <Form.Item>
                             <p className="regular-body"> <a className="link" href="/#">Belum Punya Akun?</a> Buat baru yuk</p>
