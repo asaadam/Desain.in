@@ -30,26 +30,26 @@ class Login extends Component {
             },
         }
 
-        this.emailEl = React.createRef();
-        this.passwordEl = React.createRef();
+        // this.emailEl = React.createRef();
+        // this.passwordEl = React.createRef();
     }
 
     handleSubmit = e => {
         e.preventDefault();
 
-        const email = this.emailEl.current.value;
-        const password = this.passwordEl.current.value;
+        // const email = this.emailEl.current.value;
+        // const password = this.passwordEl.current.value;
 
-        console.log(email + " " + password)
+        // console.log(email + " " + password)
         // if(email.trim().length === 0 || password.trim().length === 0){
         //     return;
         // }
 
-        // this.props.form.validateFields((err, values) => {
-            // if (!err) {
+        this.props.form.validateFields((err, values) => {
+            if (!err) {
                 const body = {
-                    email,
-                    password
+                    email: values.email,
+                    password: values.password
                 }
 
                 fetch(URL_LOGIN, {
@@ -77,8 +77,8 @@ class Login extends Component {
                     this.setState({ login: false })
 
                 });
-            // }
-        // });
+            }
+        });
     };
 
     render() {
@@ -97,15 +97,15 @@ class Login extends Component {
                         <Form.Item label="Email" {...formItemLayout} >
                             {getFieldDecorator('email', {
                                 rules: [{ required: true, message: 'Please input your email!' }],
-                            })(<Input placeholder="improudtodesign@mail.com" type="email" ref={this.emailEl} />)}
+                            })(<Input placeholder="improudtodesign@mail.com" type="email" />)}
                         </Form.Item>
                         <Form.Item label="Password" type="password" {...formItemLayout}>
                             {getFieldDecorator('password', {
                                 rules: [{ required: true, message: 'Please input your password!' }],
-                            })(<Input placeholder="password" type="password" ref={this.passwordEl} />)}
+                            })(<Input placeholder="password" type="password"  />)}
                         </Form.Item>
                         <Form.Item>
-                            <Button style="button primary fluid" text="masuk" type="submit" />
+                            <Button style="button primary fluid" text="masuk" type="submit"/>
                         </Form.Item>
                         <Form.Item>
                             <p className="regular-body"> <a className="link" href="/#">Belum Punya Akun?</a> Buat baru yuk</p>
