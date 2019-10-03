@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Menu } from 'antd';
-import Button from '../../Button/Button';
+import Button from '../../button/button';
 import { Link } from 'react-router-dom';
 
 const MenuItem = Menu.Item;
