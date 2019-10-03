@@ -1,39 +1,45 @@
 import React, { Component } from 'react';
-import {Menu} from 'antd';
+import { Menu } from 'antd';
 import Button from '../../Button/Button';
+import { Link } from 'react-router-dom';
+
 const MenuItem = Menu.Item;
 const SubMenu = Menu.SubMenu;
 
 class RightMenu extends Component {
-render(){
-    return(
-        <Menu mode={this.props.mode}>
-            <MenuItem key="beranda">
-                <a href="/#">BERANDA</a>
-            </MenuItem>
-            <MenuItem key="kontes">
-                <a href="kontes">KONTES</a>
-            </MenuItem>
-            <SubMenu title={<span>LAYANAN</span>}>
-                <MenuItem>
-                    <a href="/#">PESAN DESAIN</a>
+    render() {
+        return (
+            <Menu mode={this.props.mode}>
+                <MenuItem key="beranda">
+                    <a href="/#">BERANDA</a>
                 </MenuItem>
-                <MenuItem>
-                    <a href="/#">BUAT KONTES</a>
+                <MenuItem key="kontes">
+                    <a href="kontes">KONTES</a>
                 </MenuItem>
-                <MenuItem>
-                    <a href="/#">CARI REKOMENDASI</a>
+                <SubMenu title={<span>LAYANAN</span>}>
+                    <MenuItem>
+                        <a href="/#">PESAN DESAIN</a>
+                    </MenuItem>
+                    <MenuItem>
+                        <a href="/#">BUAT KONTES</a>
+                    </MenuItem>
+                    <MenuItem>
+                        <a href="/#">CARI REKOMENDASI</a>
+                    </MenuItem>
+                </SubMenu>
+                <MenuItem className="button-nav">
+                    <Link to="/login">
+                        <Button style="button primary" text="Masuk" ></Button>
+                    </Link>
                 </MenuItem>
-            </SubMenu>
-            <MenuItem  className="button-nav">
-                <Button style="button primary" text="Masuk"></Button>
-            </MenuItem>
-            <MenuItem  className="button-nav">
-                <Button style="button secondary" text="Daftar"></Button>
-            </MenuItem>
-        </Menu>
-    );
-}
+                <MenuItem className="button-nav">
+                    <Link to="/register">
+                    <Button style="button secondary" text="Daftar"></Button>
+                    </Link>
+                </MenuItem>
+            </Menu>
+        );
+    }
 }
 
 export default RightMenu;

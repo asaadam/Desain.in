@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import Axios from 'axios';
+import { Redirect } from 'react-router-dom';
 
 import { Row, Col, Form, Input, message } from 'antd';
 import Logo from '../../assets/images/logo-2.svg';
@@ -10,11 +11,22 @@ import './login.scss';
 const URL_LOGIN = 'http://localhost:5000/auth/login';
 class Login extends Component {
 
+
+
+
     constructor(props) {
         super(props);
         this.state = {
             errorMessage: null
         };
+    }
+
+    componentWillMount() {
+        if (localStorage.token) {
+            return (
+                <Redirect to="/" />
+            )
+        }
     }
 
     handleSubmit = e => {

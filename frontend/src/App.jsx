@@ -11,14 +11,10 @@ class App extends Component {
     return (
       <Router>
         <Switch>
-          {token && <Redirect from="/login" to="/" exact/>}
-          {token && <Redirect from="/register" to="/" exact/>}
-          
-          {!token && (<Route path="/login" component={LoginPage}/>)}
-          {!token && (<Route path="/register" component={RegisterPage}/>)}
-
-          <Route path="/" component={HomePage} exact/>
-
+        
+          <Route path="/login" component={LoginPage} />
+          <Route path="/" component={HomePage} exact />
+          <Route path="/register" component={RegisterPage} />
         </Switch>
       </Router>
     )
