@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
-import { Row, Col, Form, Input } from 'antd';
+
+import { Row, Col, Form, Input, message } from 'antd';
 import Button from '../../components/Button/Button';
 import './register.scss';
+import Axios from 'axios';
 
 const URL_SINGUP = 'http://localhost:5000/auth/signup';
 class Register extends Component {
@@ -9,16 +11,7 @@ class Register extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            done: false,
-            signup: false,
-            errorMessage: "",
-            user: {
-                username: "",
-                email: "",
-                password: "",
-                confirmPassword: ""
-            },
-
+            errorMessage: null
         };
     }
 
@@ -26,9 +19,8 @@ class Register extends Component {
         const form = this.props.form;
         if (value && value !== form.getFieldValue('password')) {
             callback('kata sandi harus sama yaa!');
-        } else {
-            callback();
         }
+        callback();
     }
 
     validateToNextPassword = (rule, value, callback) => {
@@ -42,37 +34,33 @@ class Register extends Component {
     handleSubmit = e => {
         e.preventDefault();
         this.props.form.validateFields((err, values) => {
-            if (!err) {
-                this.setState({ errorMessage: "" });
-                const body = {
-                    username: values.username,
-                    password: values.password
-                }
-                this.setState({ signup: true })
-                    fetch(URL_SINGUP, {
-                        method: 'POST',
-                        body: JSON.stringify(body),
-                        headers: {
-                            'Content-Type': 'application/json'
-                        }
-                    }).then(response => {
-                        if (response.ok) {
-                            return response.json();
+            if (err) { }
 
-                        }
-                        return response.json().then(error => {
-                            throw new Error(error.message);
-                        });
-                    }).then(user => {
-                        this.setState({ done: true })
-                        this.setState({ signup: false })
-                    }).catch(error => {
-                        this.setState({ errorMessage: error.message });
-                        this.setState({ signup: false })
-
-                    });
-                
+            const body = {
+                nama: values.nama,
+                email: values.email,
+                password: values.password,
+                phone_number: values.phone_number
             }
+
+            if (body.password !== values.confirmPassword) {
+                return;
+            }
+
+            Axios.post(URL_SINGUP, body, {
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            }).then(response => {
+                console.log(response);
+                if(response.status == 200 || response.status == 201){
+                    this.props.history.push('login');
+                }
+            }).catch(error => {
+                const { data } = error.response;
+                this.setState({ errorMessage: true });
+                message.error(data.message);
+            });
         });
     };
 
@@ -91,42 +79,37 @@ class Register extends Component {
                     </p>
                     </div>
                     <Form layout="vertical" onSubmit={this.handleSubmit} className="register-wrap">
-                        <Form.Item label="Username" {...formItemLayout} >
-                            {getFieldDecorator('username', {
+                        <Form.Item label="Nama" {...formItemLayout} >
+                            {getFieldDecorator('nama', {
                                 rules: [{ required: true, message: 'Namamu terlewat, tolong diisi ya' }],
-                            }
-                            )(
-                                <Input placeholder="Gunakan nama aslimu agar mudah dikenali" />)
-                            }
+                            })(<Input placeholder="desainin company" type="text" />)}
                         </Form.Item>
-                        <Form.Item label="Alamat Email" {...formItemLayout} >
+                        <Form.Item label="Email" {...formItemLayout} >
                             {getFieldDecorator('email', {
                                 rules: [{ required: true, message: 'Alamat emailmu terlewat, tolong diisi ya' }],
-                            }
-                            )(
-                                <Input placeholder="improudtodesign@mail.com" />)
-                            }
+                            })(<Input placeholder="improudtodesign@mail.com" type="email" />)}
+                        </Form.Item>
+                        <Form.Item label="Telepon" {...formItemLayout} >
+                            {getFieldDecorator('phone_number', {
+                                rules: [{ required: true, message: 'Teleponmu terlewat, tolong diisi ya' }]
+                            })(<Input placeholder="08231789182" type="number" minLength="10" />)}
                         </Form.Item>
                         <Form.Item label="Password" {...formItemLayout} >
                             {getFieldDecorator('password', {
                                 rules: [{ required: true, message: 'Kata sandi untuk keamananmu, jangan terlewat' }, {
-                                    validator: this.validateToNextPassword}],
-                            }
-                            )(
-                                <Input placeholder="Masukkan kata sandi" />)
-                            }
+                                    validator: this.validateToNextPassword
+                                }],
+                            })(<Input placeholder="Masukkan kata sandi" type="password" minLength="8" />)}
                         </Form.Item>
-                        <Form.Item label="Masukkan kembali password" {...formItemLayout} >
+                        <Form.Item label="Konfirmasi Password" {...formItemLayout} >
                             {getFieldDecorator('confirmPassword', {
                                 rules: [{ required: true, message: 'password yang diberikan berbeda nih' }, {
-                                    validator: this.compareToFirstPassword}],
-                            }
-                            )(
-                                <Input placeholder="Pastikan sama ya" />)
-                            }
+                                    validator: this.compareToFirstPassword
+                                }],
+                            })(<Input placeholder="Masukkan kembali kata sandi" type="password" minLength="8" />)}
                         </Form.Item>
                         <Form.Item>
-                            <p>Dengan bergabung dengan kami anda akan dinyatakan setuju  dengan segala <a className="link" href="/#">kebijakan kami</a></p>
+                            <p>Dengan bergabung dengan kami anda akan dinyatakan setuju dengan segala<a className="link" href="/#"> kebijakan kami</a></p>
                         </Form.Item>
                         <Form.Item>
                             <Button style="button primary" text="daftar" htmlType="submit" />

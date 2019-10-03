@@ -6,11 +6,11 @@ import HomeHero from '../components/layouts/home-hero/HomeHero';
 class App extends Component {
   render() {
     return (
-        <div>
-            <NavBar/>
-            <HomeHero/>
-            <Footer/>
-        </div>
+      <div>
+        <NavBar />
+        <HomeHero />
+        <Footer />
+      </div>
     );
   }
 }

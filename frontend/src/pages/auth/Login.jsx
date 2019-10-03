@@ -1,83 +1,46 @@
 import React, { Component } from 'react';
+import Axios from 'axios';
 
-import { Row, Col, Form, Input } from 'antd';
+import { Row, Col, Form, Input, message } from 'antd';
 import Logo from '../../assets/images/logo-2.svg';
 import Deco from '../../assets/images/login-people.svg';
 import Button from '../../components/Button/Button';
 import './login.scss';
 
-import AuthContext from '../../context/auth-context';
-
 const URL_LOGIN = 'http://localhost:5000/auth/login';
-
 class Login extends Component {
-
-    // state = {
-    //     isLogin: false
-    // };
-
-    // static contextType = AuthContext;
 
     constructor(props) {
         super(props);
         this.state = {
-            done: false,
-            login: false,
-            errorMessage: "",
-            user: {
-                email: "",
-                password: "",
-            },
-        }
-
-        // this.emailEl = React.createRef();
-        // this.passwordEl = React.createRef();
+            errorMessage: null
+        };
     }
 
     handleSubmit = e => {
         e.preventDefault();
 
-        // const email = this.emailEl.current.value;
-        // const password = this.passwordEl.current.value;
-
-        // console.log(email + " " + password)
-        // if(email.trim().length === 0 || password.trim().length === 0){
-        //     return;
-        // }
-
         this.props.form.validateFields((err, values) => {
-            if (!err) {
-                const body = {
-                    email: values.email,
-                    password: values.password
-                }
+            if (err) { }
 
-                fetch(URL_LOGIN, {
-                    method: 'POST',
-                    body: JSON.stringify(body),
-                    headers: {
-                        'content-type': 'application/json'
-                    }
-                }).then(response => {
-                    if (response.ok) {
-                        return response.json();
-                    }
-                    return response.json().then(error => {
-                        throw new Error(error.message);
-                    });
-                }).then(token => {
-                    console.log('token' + token)
-                    localStorage.token = token;
-                    this.setState({ done: true });
-                    this.setState({ login: false });
-                    this.props.history.replace('/dashboard')
-                }).catch(error => {
-                    console.log('fetch error' + error)
-                    this.setState({ errorMessage: error.message });
-                    this.setState({ login: false })
-
-                });
+            const body = {
+                email: values.email,
+                password: values.password
             }
+
+            Axios.post(URL_LOGIN, body, {
+                headers: {
+                    'content-type': 'application/json'
+                }
+            }).then(response => {
+                const { token } = response.data;
+                localStorage.token = token;
+                this.props.history.push('/');
+            }).catch(error => {
+                const { data } = error.response;
+                this.setState({ errorMessage: true });
+                message.error(data.message);
+            });
         });
     };
 
@@ -102,13 +65,13 @@ class Login extends Component {
                         <Form.Item label="Password" type="password" {...formItemLayout}>
                             {getFieldDecorator('password', {
                                 rules: [{ required: true, message: 'Please input your password!' }],
-                            })(<Input placeholder="password" type="password"  />)}
+                            })(<Input placeholder="password" type="password" />)}
                         </Form.Item>
                         <Form.Item>
-                            <Button style="button primary fluid" text="masuk" type="submit"/>
+                            <Button style="button primary fluid" text="masuk" type="submit" />
                         </Form.Item>
                         <Form.Item>
-                            <p className="regular-body"> <a className="link" href="/#">Belum Punya Akun?</a> Buat baru yuk</p>
+                            <p className="regular-body"> <a className="link" href="/register">Belum Punya Akun?</a> Buat baru yuk</p>
                         </Form.Item>
                     </Form>
                 </Col>
