@@ -5,7 +5,7 @@ import { Redirect } from 'react-router-dom';
 import { Row, Col, Form, Input, message } from 'antd';
 import Logo from '../../assets/images/logo-2.svg';
 import Deco from '../../assets/images/login-people.svg';
-import Button from '../../components/Button/Button';
+import Button from '../../components/button/ButtonAntd';
 import './login.scss';
 
 const URL_LOGIN = 'http://localhost:5000/auth/login';
