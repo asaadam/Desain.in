@@ -70,6 +70,17 @@
     @include font-size(1rem !important);
 }
 
+.card-title {
+    font-family: "Nunito-sbld";
+    color: #191847;
+    @include font-size(1.2rem !important);
+}
+
+.link {
+    font-family: "Nunito-sbld";
+    color:#0020da;
+}
+
 label {
     font-family: "Nunito-bld";
     @include font-size(1.3rem !important);
