@@ -5,14 +5,11 @@ import { Redirect } from 'react-router-dom';
 import { Row, Col, Form, Input, message } from 'antd';
 import Logo from '../../assets/images/logo-2.svg';
 import Deco from '../../assets/images/login-people.svg';
-import Button from '../../components/button/ButtonAntd';
+import Button from '../../components/button/Button';
 import './login.scss';
 
 const URL_LOGIN = 'http://localhost:5000/auth/login';
 class Login extends Component {
-
-
-
 
     constructor(props) {
         super(props);
@@ -21,7 +18,7 @@ class Login extends Component {
         };
     }
 
-    componentWillMount() {
+    componentDidMount() {
         if (localStorage.token) {
             return (
                 <Redirect to="/" />
@@ -77,7 +74,7 @@ class Login extends Component {
                         <Form.Item label="Password" type="password" {...formItemLayout}>
                             {getFieldDecorator('password', {
                                 rules: [{ required: true, message: 'Please input your password!' }],
-                            })(<Input placeholder="password" type="password" />)}
+                            })(<Input placeholder="password" type="password" minLength="8" />)}
                         </Form.Item>
                         <Form.Item>
                             <Button style="button primary fluid" text="masuk" type="submit" />

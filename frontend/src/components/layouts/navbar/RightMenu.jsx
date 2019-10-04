@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import { Menu } from 'antd';
-import Button from '../../button/button';
+import { Menu, A } from 'antd';
+import Button from '../../button/ButtonAntd';
 import { Link } from 'react-router-dom';
 
 const MenuItem = Menu.Item;
@@ -21,7 +21,7 @@ class RightMenu extends Component {
                         <a href="/#">PESAN DESAIN</a>
                     </MenuItem>
                     <MenuItem>
-                        <a href="/#">BUAT KONTES</a>
+                        <a href="/create-contest">BUAT KONTES</a>
                     </MenuItem>
                     <MenuItem>
                         <a href="/#">CARI REKOMENDASI</a>
@@ -34,7 +34,7 @@ class RightMenu extends Component {
                 </MenuItem>
                 <MenuItem className="button-nav">
                     <Link to="/register">
-                    <Button style="button secondary" text="Daftar"></Button>
+                        <Button style="button secondary" text="Daftar"></Button>
                     </Link>
                 </MenuItem>
             </Menu>

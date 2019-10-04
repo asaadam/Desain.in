@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import {  Redirect } from 'react-router-dom';
 
 import { Row, Col, Form, Input, message } from 'antd';
-import Button from '../../components/button/button';
+import Button from '../../components/button/ButtonAntd';
 import './register.scss';
 import Axios from 'axios';
 

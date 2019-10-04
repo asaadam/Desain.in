@@ -8,6 +8,7 @@ class Home extends Component {
   render() {
     return (
       <div>
+        <NavBar/>
         <HomeHero />
         <DisplayPortofoloio />
         <Footer />
