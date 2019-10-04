@@ -12,7 +12,6 @@ class ChatPage extends Component {
     render() {
         return(
             <div>
-                <Navbar/>
                 <div className="chat-page">
                     <Row gutter={2}>
                         <Col span={16}>
