@@ -10,7 +10,6 @@ class rekomendasiStylePerson extends Component {
     render() {
         return(
             <div>
-            <Navbar/>
             <BannerStyle/>
             <DisplayStyle/>
             <Footer/>
