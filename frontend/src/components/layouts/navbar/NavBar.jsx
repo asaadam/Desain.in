@@ -12,8 +12,8 @@ const { Item: MenuItem, SubMenu } = Menu;
 class NavBar extends Component {
     state = {
         visible: false,
-        logged: false
-
+        logged: false,
+        render:false,
     }
 
     showDrawer = () => {
@@ -36,61 +36,74 @@ class NavBar extends Component {
         else{
             this.setState({logged:false});
         }
+        let location = window.location.pathname
+        if(location !== '/register' && location !== '/login'){
+            console.log('disini');
+            this.setState({render:true})
+          }
+        
+          else{
+            this.setState({render:false})
+          }
     }
 
     render() {
-        return (
+        if (this.state.render){
+            return (
 
-            <Menu onClick={this.handleClick} selectedKeys={[this.state.current]} mode="horizontal" inlineCollapsed={false}>
-                <Menu.Item key="Logo">
-                    <img style={{ width: '10vw', height: 'auto', paddingBottom: '1vw', paddingTop: '1vw' }} src={Logo} alt="Design.in"></img>
-                </Menu.Item>
-                <Menu.Item key="beranda" >
-                    BERANDA
-                </Menu.Item>
-                <Menu.Item key="app" >
-                    KONTES
-                </Menu.Item>
-                <SubMenu
-                    title={
-                        <li className={'ant-menu-item'}>
-                            LAYANAN
-                 </li>
-                    }
-                >
-                    <Menu.Item key="setting:1">PESAN DESAIN</Menu.Item>
-                    <Menu.Item key="setting:2">BUAT KONTES</Menu.Item>
-                    <Menu.Item key="setting:3">CARI REKOMENDASI</Menu.Item>
-                </SubMenu>
-                {this.state.logged ? 
-                <div style={{ display: 'flex', flexDirection: 'row', float: 'right', justifyContent: 'center' }}>
-
-                        <MenuItem style={{ paddingLeft: '20px' }} onClick={()=>{
-                            localStorage.clear();
-                            window.location.replace('/');
-                        }}>
-                            <Button style="button primary" text="Logout"></Button>
-                        </MenuItem>
-                    
-                </div> : 
-                <div style={{ display: 'flex', flexDirection: 'row', float: 'right', justifyContent: 'center' }}>
-                        <Link to="/login">
-
-                            <MenuItem style={{ paddingLeft: '20px' }}>
-                                <Button style="button primary" text="Login"></Button>
+                <Menu onClick={this.handleClick} selectedKeys={[this.state.current]} mode="horizontal" inlineCollapsed={false}>
+                    <Menu.Item key="Logo">
+                        <img style={{ width: '10vw', height: 'auto', paddingBottom: '1vw', paddingTop: '1vw' }} src={Logo} alt="Design.in"></img>
+                    </Menu.Item>
+                    <Menu.Item key="beranda" >
+                        BERANDA
+                    </Menu.Item>
+                    <Menu.Item key="app" >
+                        KONTES
+                    </Menu.Item>
+                    <SubMenu
+                        title={
+                            <li className={'ant-menu-item'}>
+                                LAYANAN
+                     </li>
+                        }
+                    >
+                        <Menu.Item key="setting:1">PESAN DESAIN</Menu.Item>
+                        <Menu.Item key="setting:2">BUAT KONTES</Menu.Item>
+                        <Menu.Item key="setting:3">CARI REKOMENDASI</Menu.Item>
+                    </SubMenu>
+                    {this.state.logged ? 
+                    <div style={{ display: 'flex', flexDirection: 'row', float: 'right', justifyContent: 'center' }}>
+    
+                            <MenuItem style={{ paddingLeft: '20px' }} onClick={()=>{
+                                localStorage.clear();
+                                window.location.replace('/');
+                            }}>
+                                <Button style="button primary" text="Logout"></Button>
                             </MenuItem>
-                        </Link>
-
-                        <Link to="/register">
-                            <MenuItem style={{ paddingLeft: '20px' }} >
-                                <Button style="button primary" text="Daftar"></Button>
-                            </MenuItem>
-                        </Link>
-
-                    </div>}
-
-            </Menu>
-        );
+                        
+                    </div> : 
+                    <div style={{ display: 'flex', flexDirection: 'row', float: 'right', justifyContent: 'center' }}>
+    
+                                <MenuItem style={{ paddingLeft: '20px' }} onClick={()=>{window.location.replace('/login')}}>
+                                    <Button style="button primary" text="Login"></Button>
+                                </MenuItem>
+    
+                                <MenuItem style={{ paddingLeft: '20px' }} onClick={()=>{window.location.replace('/register')}}>
+                                    <Button style="button primary" text="Daftar"></Button>
+                                </MenuItem>
+    
+                        </div>}
+    
+                </Menu>
+            );
+        }
+        else{
+            return (
+                <Fragment/>
+            )
+        }
+       
     }
 }
 

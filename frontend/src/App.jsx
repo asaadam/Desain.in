@@ -13,19 +13,21 @@ import RekomendasiStylePerson from './pages/rekomendasi/rekomendasiStylePerson';
 
 
 
-const navbar = ()=>{
-  console.log(window.location.pathname);
-  if(window.location.pathname =='/login' || '/register'){
-    return (<Fragment></Fragment>)
-
-  }
-  else{
-    return <Navbar></Navbar>
-  }
-}
 
 
 class App extends Component {
+
+
+
+  constructor(props){
+    super(props);
+    this.state={
+      navbar:true
+    }
+  }
+ 
+
+
   render() {
     return (
       <Router>
@@ -34,7 +36,7 @@ class App extends Component {
         <Route path="/login" component={LoginPage} />
           <Route path="/register" component={RegisterPage} />
         </Switch>
-      {navbar()}
+          <Navbar/>
         <Switch>
           <Route path="/" component={HomePage} exact />
           <Route path="/chat" component={ChatPage} />
