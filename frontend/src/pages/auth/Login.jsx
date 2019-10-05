@@ -44,7 +44,7 @@ class Login extends Component {
             }).then(response => {
                 const { token } = response.data;
                 localStorage.token = token;
-                this.props.history.push('/');
+                window.location.replace('/');
             }).catch(error => {
                 const { data } = error.response;
                 this.setState({ errorMessage: true });
