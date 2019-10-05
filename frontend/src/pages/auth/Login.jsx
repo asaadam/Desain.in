@@ -18,11 +18,10 @@ class Login extends Component {
         };
     }
 
-    componentDidMount() {
+    componentWillMount() {
         if (localStorage.token) {
-            return (
-                <Redirect to="/" />
-            )
+                window.location.replace('/');
+            
         }
     }
 
