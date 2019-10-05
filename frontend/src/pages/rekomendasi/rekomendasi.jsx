@@ -10,16 +10,10 @@ class rekomendasi extends Component {
     render() {
         return (
             <div>
-<<<<<<< HEAD
-            <BannerStyle/>
-            <DisplayStyle/>
-            <Footer/>
-=======
                 <Navbar />
                 <BannerStyle />
                 <DisplayStyle />
                 <Footer />
->>>>>>> navbar
             </div>
         );
     }

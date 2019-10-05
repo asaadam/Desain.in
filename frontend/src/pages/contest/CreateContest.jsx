@@ -49,12 +49,8 @@ class CreateContest extends Component {
         const { getFieldDecorator } = this.props.form;
         return (
             <div>
-<<<<<<< HEAD
-                <div className= "halfHero" >
-=======
                 <Navbar />
                 <div className="halfHero" >
->>>>>>> navbar
                     <img className="halfHeroImage" src={Deco} ></img>
                     <Col span={16} push={8}>
                         <div className="heroContent" title-3>
