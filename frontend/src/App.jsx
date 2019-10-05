@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import Navbar from './components/layouts/navbar/NavBar';
 import LoginPage from './pages/auth/Login';
@@ -13,7 +13,21 @@ import RekomendasiStylePerson from './pages/rekomendasi/rekomendasiStylePerson';
 
 
 
+
+
 class App extends Component {
+
+
+
+  constructor(props){
+    super(props);
+    this.state={
+      navbar:true
+    }
+  }
+ 
+
+
   render() {
     return (
       <Router>
@@ -22,7 +36,7 @@ class App extends Component {
         <Route path="/login" component={LoginPage} />
           <Route path="/register" component={RegisterPage} />
         </Switch>
-        <Navbar/>
+          <Navbar/>
         <Switch>
           <Route path="/" component={HomePage} exact />
           <Route path="/chat" component={ChatPage} />

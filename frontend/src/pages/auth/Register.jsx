@@ -11,12 +11,10 @@ class Register extends Component {
 
     componentWillMount() {
         if (localStorage.token) {
-            return (
-                <Redirect to="/" />
-            )      
-          }
+                window.location.replace('/');
+            
         }
-
+    }
 
         constructor(props) {
             super(props);
