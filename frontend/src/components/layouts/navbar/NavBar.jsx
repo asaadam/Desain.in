@@ -13,7 +13,7 @@ class NavBar extends Component {
     state = {
         visible: false,
         logged: false,
-        render:false,
+        render: false,
     }
 
     showDrawer = () => {
@@ -32,23 +32,21 @@ class NavBar extends Component {
     componentWillMount() {
         if (localStorage.token) {
             this.setState({ logged: true });
+        } else {
+            this.setState({ logged: false });
         }
-        else{
-            this.setState({logged:false});
-        }
+
         let location = window.location.pathname
-        if(location !== '/register' && location !== '/login'){
+        if (location !== '/register' && location !== '/login') {
             console.log('disini');
-            this.setState({render:true})
-          }
-        
-          else{
-            this.setState({render:false})
-          }
+            this.setState({ render: true })
+        } else {
+            this.setState({ render: false })
+        }
     }
 
     render() {
-        if (this.state.render){
+        if (this.state.render) {
             return (
 
                 <Menu onClick={this.handleClick} selectedKeys={[this.state.current]} mode="horizontal" inlineCollapsed={false}>
@@ -65,45 +63,45 @@ class NavBar extends Component {
                         title={
                             <li className={'ant-menu-item'}>
                                 LAYANAN
-                     </li>
+                    </li>
                         }
                     >
                         <Menu.Item key="setting:1">PESAN DESAIN</Menu.Item>
                         <Menu.Item key="setting:2">BUAT KONTES</Menu.Item>
                         <Menu.Item key="setting:3">CARI REKOMENDASI</Menu.Item>
                     </SubMenu>
-                    {this.state.logged ? 
-                    <div style={{ display: 'flex', flexDirection: 'row', float: 'right', justifyContent: 'center' }}>
-    
-                            <MenuItem style={{ paddingLeft: '20px' }} onClick={()=>{
+                    {this.state.logged ?
+                        <div style={{ display: 'flex', flexDirection: 'row', float: 'right', justifyContent: 'center' }}>
+
+                            <MenuItem style={{ paddingLeft: '20px' }} onClick={() => {
                                 localStorage.clear();
                                 window.location.replace('/');
                             }}>
                                 <Button style="button primary" text="Logout"></Button>
                             </MenuItem>
-                        
-                    </div> : 
-                    <div style={{ display: 'flex', flexDirection: 'row', float: 'right', justifyContent: 'center' }}>
-    
-                                <MenuItem style={{ paddingLeft: '20px' }} onClick={()=>{window.location.replace('/login')}}>
-                                    <Button style="button primary" text="Login"></Button>
-                                </MenuItem>
-    
-                                <MenuItem style={{ paddingLeft: '20px' }} onClick={()=>{window.location.replace('/register')}}>
-                                    <Button style="button primary" text="Daftar"></Button>
-                                </MenuItem>
-    
+
+                        </div> :
+                        <div style={{ display: 'flex', flexDirection: 'row', float: 'right', justifyContent: 'center' }}>
+
+                            <MenuItem style={{ paddingLeft: '20px' }} onClick={() => { window.location.replace('/login') }}>
+                                <Button style="button primary" text="Login"></Button>
+                            </MenuItem>
+
+                            <MenuItem style={{ paddingLeft: '20px' }} onClick={() => { window.location.replace('/register') }}>
+                                <Button style="button primary" text="Daftar"></Button>
+                            </MenuItem>
+
                         </div>}
-    
+
                 </Menu>
             );
         }
-        else{
+        else {
             return (
-                <Fragment/>
+                <Fragment />
             )
         }
-       
+
     }
 }
 
