@@ -1,16 +1,44 @@
 import React, { Component } from 'react';
 import { Col } from 'antd';
-import { Row, ThemeProvider, TextComposer, IconButton, AddIcon, TextInput, SendButton } from '@livechat/ui-kit'
+import { Row, ThemeProvider, TextComposer, IconButton, AddIcon, TextInput, SendButton } from '@livechat/ui-kit';
+
 import Navbar from '../../components/layouts/navbar/NavBar';
 import AvatarDetail from '../../components/avatar-detail/AvatarDetail';
 import StepDesigner from '../../components/layouts/chat-layout/StepperChatDesigner';
 import './chatPage.scss';
 import '../../components/layouts/typography.scss';
+import Axios from 'axios';
 
 class ChatPage extends Component {
+    state = {
+        errorMessage: null,
+        transac: [],
+        isLoaded: false
+    };
+
+    getAllStep = () => {
+        return Axios.get("http://localhost:5000/transaction/detail/2", {
+            headers: {
+                'Content-Type': 'application/json',
+                Authorization: 'Bearer ' + localStorage.token
+            },
+        })
+    }
+
+    async componentDidMount() {
+        const { data } = await this.getAllStep();
+        this.setState({ transac: data.transactionDetail, isLoaded: true });
+
+        await this.RenderEachStep();
+    }
+
+    RenderEachStep = () => {
+        const step = this.state.transac.step;
+        return <StepDesigner step={step} />
+    }
 
     render() {
-        return(
+        return (
             <div>
                 <div className="chat-page">
                     <Row gutter={2}>
@@ -36,20 +64,16 @@ class ChatPage extends Component {
                         </Col>
                         <Col span={8}>
                             <div className="step-view">
-                                <p className="sub-title">
-                                    Designer info
-                                </p>
-                                <AvatarDetail title="Tony Hurella" meta="mendapat invitasi"/>
+                                {localStorage.userStatus == 0 ? <p className="sub-title">User Info</p> : <p className="sub-title">Desainer Info</p>}
+                                <AvatarDetail title="Tony Hurella" meta="mendapat invitasi" />
                                 <p className="bigger-body-text">
                                     Progress Pekerjaan
                                 </p>
-                                <div className="display-step">
-                                    <StepDesigner titleName="design brief" persen="30%" biaya="90.000"/>
-                                </div>
+                                {this.state.isLoaded && this.RenderEachStep()}
                                 <p className="bigger-body-text">
                                     Total nilai proyek
-                                    <br/>
-                                    Rp. 300.0000
+                                    <br />
+                                    Rp. {this.state.transac.harga}
                                 </p>
                             </div>
                         </Col>

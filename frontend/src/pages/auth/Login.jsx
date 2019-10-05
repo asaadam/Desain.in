@@ -42,8 +42,10 @@ class Login extends Component {
                     'content-type': 'application/json'
                 }
             }).then(response => {
-                const { token } = response.data;
+                const { userId, token, status } = response.data;
                 localStorage.token = token;
+                localStorage.userId = userId;
+                localStorage.userStatus = status;
                 this.props.history.push('/');
             }).catch(error => {
                 const { data } = error.response;
