@@ -26,7 +26,7 @@ const props = {
         } else if (status === 'error') {
             message.error(`${info.file.name} file upload failed.`);
         }
-        },
+    },
 };
 
 function onChange(date, dateString) {
@@ -42,21 +42,26 @@ function onNumberChange(value) {
 }
 
 class CreateContest extends Component {
-    
+
 
     render() {
         const formItemLayout = "vertical";
         const { getFieldDecorator } = this.props.form;
-        return(
+        return (
             <div>
+<<<<<<< HEAD
                 <div className= "halfHero" >
+=======
+                <Navbar />
+                <div className="halfHero" >
+>>>>>>> navbar
                     <img className="halfHeroImage" src={Deco} ></img>
                     <Col span={16} push={8}>
                         <div className="heroContent" title-3>
                             <p className="title-3">
-                            Lengkapi formulir dibawah
+                                Lengkapi formulir dibawah
                             <br></br>
-                            dan mulai kontesmu!
+                                dan mulai kontesmu!
                             </p>
                         </div>
                     </Col>
@@ -83,7 +88,7 @@ class CreateContest extends Component {
                                         rules: [{ required: true, message: 'Please input your description' }],
                                     }
                                     )(
-                                        <TextArea  />)
+                                        <TextArea />)
                                     }
                                 </Form.Item>
                                 <Form.Item label="Detail Konten"  {...formItemLayout}>
@@ -102,7 +107,7 @@ class CreateContest extends Component {
                                                 Support for a single or bulk upload. Strictly prohibit from uploading company data or other
                                                 band files
                                             </p>
-                                        </Dragger>,)
+                                        </Dragger>)
                                     }
                                 </Form.Item>
                                 <Form.Item label="Kapan Kontesmu Dilaksanakan"  {...formItemLayout}>
@@ -151,7 +156,7 @@ class CreateContest extends Component {
                                         rules: [{ required: true, message: 'Please input your description' }],
                                     }
                                     )(
-                                        <TextArea  />)
+                                        <TextArea />)
                                     }
                                 </Form.Item>
                                 <Form.Item label="Unggah Lampiran"  {...formItemLayout}>
@@ -170,7 +175,7 @@ class CreateContest extends Component {
                                                 Support for a single or bulk upload. Strictly prohibit from uploading company data or other
                                                 band files
                                             </p>
-                                        </Dragger>,)
+                                        </Dragger>)
                                     }
                                 </Form.Item>
                             </Col>
@@ -197,24 +202,24 @@ class CreateContest extends Component {
                                     }
                                     )(
                                         <InputNumber
-                                        style={{ width: 300 }}
-                                        defaultValue={0}
-                                        formatter={value => `Rp. ${value}`.replace(/\B(?=(\d{3})+(?!\d))/g, '.')}
-                                        parser={value => value.replace(/\Rp.\s?|(,*)/g, '')}
-                                        onChange={onNumberChange}
+                                            style={{ width: 300 }}
+                                            defaultValue={0}
+                                            formatter={value => `Rp. ${value}`.replace(/\B(?=(\d{3})+(?!\d))/g, '.')}
+                                            parser={value => value.replace(/\Rp.\s?|(,*)/g, '')}
+                                            onChange={onNumberChange}
                                         />)
                                     }
                                 </Form.Item>
                                 <Form.Item>
-                                    <Button style="button primary" text="BUAT CONTEST" htmlType="submit" onClick={this.handleSubmit}/>
+                                    <Button style="button primary" text="BUAT CONTEST" htmlType="submit" onClick={this.handleSubmit} />
                                 </Form.Item>
                             </Col>
                         </Row>
-                        
-                        
+
+
                     </Form>
                 </div>
-                <Footer/>
+                <Footer />
             </div>
         );
     };

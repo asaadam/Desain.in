@@ -30,6 +30,10 @@ class UpdateProfle extends Component {
         const { getFieldDecorator } = this.props.form;
         return (
             <div>
+<<<<<<< HEAD
+=======
+                <Navbar />
+>>>>>>> navbar
                 <div className="halfHero" >
                     <img className="halfHeroImage" src={Deco} ></img>
                     <Col span={16} push={2}>
@@ -86,7 +90,12 @@ class UpdateProfle extends Component {
                                     placeholder=""
                                     value={selectedItems}
                                     onChange={this.handleChange}
+<<<<<<< HEAD
                                     style={{ width: '100%' }}>
+=======
+                                    style={{ width: '100%' }}
+                                >
+>>>>>>> navbar
                                     {filteredOptions.map(item => (
                                         <Select.Option key={item} value={item}>
                                             {item}
@@ -119,10 +128,20 @@ class UpdateProfle extends Component {
                                 <Button style="button tertirary" text="CANCEL" htmlType="reset" onClick={this.handleReset} />
                             </Form.Item>
                         </Col>
+<<<<<<< HEAD
                     </Form>
                 </div>
                 <Footer />
             </div>
+=======
+
+                    </Form>
+
+                </div>
+                <Footer />
+            </div>
+
+>>>>>>> navbar
         )
     }
 }

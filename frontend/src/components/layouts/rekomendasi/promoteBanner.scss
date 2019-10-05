@@ -10,13 +10,14 @@
 }
 
 .promote-banner-contest {
-    height: 93vh;
+    height: 73vh;
     background-color: #EDF5F8;
     display: flex;
     justify-content: center;
     align-items: center;
     text-align: center;
 }
+
 .promote-banner-profile {
     height: 50vh;
     background-color: #EDF5F8;
@@ -24,7 +25,6 @@
     align-items: center;
     text-align: center;
 }
-
 
 .image-bg{
     width: 96vw;
@@ -39,7 +39,7 @@
     position: absolute;
 }
 .image-bg-person{
-    width: 90vw;
+    height: 100vh;
     z-index: 1;
     margin-left: 60px;
     margin-top: 140px;
@@ -87,6 +87,7 @@
 .ads-content-contest-2 {
     padding: 79vh 5vw;
     width: 65vw;
+    margin-bottom: 5vh;
 }
 
 .wrapper {

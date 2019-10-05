@@ -13,7 +13,7 @@ class Home extends Component {
         <div>
 
             <HomeHero/>
-            <DisplayPortofoloio/>
+            <DisplayPortofoloio judulDisplay="Portofolio Kreatif Minggu Ini"/>
             <PromoteBannerService/>
             <DisplayContest/>
             <PromoteBannerContest/>

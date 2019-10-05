@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import Navbar from '../../components/layouts/navbar/NavBar';
 import Footer from '../../components/layouts/footer/Footer';
-import DisplayStyle from '../../components/layouts/rekomendasi/DisplayStyleRekomendasiPerson';
-import BannerStyle from '../../components/layouts/rekomendasi/PromoteBannerRekomendasiPerson';
+import DisplayStyle from '../../components/layouts/rekomendasi/DisplayRekomendasiPerson';
+import BannerStyle from '../../components/layouts/rekomendasi/PromoteBannerPerson';
 
 
 
@@ -10,16 +10,10 @@ class rekomendasiStylePerson extends Component {
     render() {
         return (
             <div>
-<<<<<<< HEAD
-            <BannerStyle/>
-            <DisplayStyle/>
-            <Footer/>
-=======
                 <Navbar />
                 <BannerStyle />
                 <DisplayStyle />
                 <Footer />
->>>>>>> navbar
             </div>
         );
     }
